@@ -1,0 +1,50 @@
+name: Update Docker Compose Version
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  update-docker-compose-version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get latest Docker Compose version
+        id: get_version
+        run: |
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)
+          echo "latest_version=${LATEST_VERSION}" >> $GITHUB_ENV
+          echo "latest_version=${LATEST_VERSION}"
+
+          if [ "$LATEST_VERSION" == "null" ]; then
+            echo "Error: Unable to fetch the docker compose latest version."
+            exit 1
+          fi
+
+      - name: Check for version update
+        id: check_update
+        run: |
+          CURRENT_VERSION=$(grep -oP '(?<=DOCKER_COMPOSE_VERSION=).*' install_docker.sh)
+          if [ "$CURRENT_VERSION" != "${{ env.latest_version }}" ]; then
+            echo "version_updated=true" >> $GITHUB_ENV
+          else
+            echo "version_updated=false" >> $GITHUB_ENV
+          fi
+
+      - name: Update Docker Compose version in script
+        if: env.version_updated == 'true'
+        run: |
+          sed -i "s/DOCKER_COMPOSE_VERSION=.*/DOCKER_COMPOSE_VERSION=${{ env.latest_version }}/" install_docker.sh
+
+      - name: Commit changes
+        if: env.version_updated == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add install_docker.sh
+          git commit -m "Update Docker Compose version to ${{ env.latest_version }}"
+          git push
