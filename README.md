@@ -9,3 +9,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs/heads/main/activate_ufw.sh)
 ```
+
+### Create SWAP
+
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs/heads/main/create_swap.sh)
+```
