@@ -5,7 +5,7 @@
 
 sudo apt update
 
-DOCKER_COMPOSE_VERSION=v5.0.2
+DOCKER_COMPOSE_VERSION=v5.1.0
 
 
 echo "⚙️ Installing Docker..."
