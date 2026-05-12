@@ -15,3 +15,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs
 ```bash
 bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs/heads/main/create_swap.sh)
 ```
+
+### All In One
+
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs/heads/main/all_in_one.sh)
+```
