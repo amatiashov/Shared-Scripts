@@ -16,6 +16,12 @@ bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs
 bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs/heads/main/create_swap.sh)
 ```
 
+### Get External IPv4
+
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/amatiashov/Shared-Scripts/refs/heads/main/get_external_ipv4.sh)
+```
+
 ### All In One
 
 ```bash
